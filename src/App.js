@@ -5,23 +5,30 @@ import Death from './Death';
 import Player from './Player';
 
 class App extends Component {
-  state ={
-    playerOneHealth:{ hp:10, action:'' },
+  state = { 
+    playerOne:{ hp:10, action:'' },
     playerTwo:{ hp:10, action:'' },
   }
 
-
+  changePlayerAction(player, action) {
+    const playerState = this.state[player];
+    playerState.action = action;
+    return this.setState({ [player] : playerState });
+  }
 
   handleAction = ({ key }) => {
     switch(key){
-    case 'w': this.setState({playerOne[action]: 'quick' });
+    case 'w':
+      this.changePlayerAction('playerOne', 'quick');
+      break;
+    case 'e':
+      this.changePlayerAction('playerOne' , 'heavy');
       break;
     default : break;
     }
   }
 
   componentDidMount(){
-    console.log('componentMounted');
     document.addEventListener('keydown', this.handleAction); 
   }
 
